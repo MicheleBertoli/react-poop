@@ -2,7 +2,8 @@
 
 # react-poop
 
-react-poop wraps the render method of your components into a try/catch block and renders a 💩 when something goes wrong.
+react-poop wraps your stateless functions and the render method of your components
+into a try/catch block and renders a 💩 when something goes wrong.
 
 ## Installation
 
@@ -12,14 +13,12 @@ npm i react-poop --save
 
 ## Usage
 
-```jsx
-const App = React.createClass({
-  render() {
-    return <div>Hello react-poop</div>
-  },
-})
+```javascript
+import React from 'react'
+import { render } from 'react-dom'
+import poop from 'react-poop'
 
-poop(App)
+const App = poop(() => <div>Hello react-poop</div>)
 
 render(<App />, document.getElementById('app'))
 ```

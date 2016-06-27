@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "test": "mocha --compilers js:babel-register --reporter=emoji-reporter ./src/**/*.spec.js",
-    "build": "babel ./src --out-dir ./dist --ignore *.spec.js"
+    "build": "babel ./src --out-dir ./dist --ignore *.spec.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
