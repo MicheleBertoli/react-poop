@@ -1,6 +1,6 @@
 {
   "name": "react-poop",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The ultimate error handler for React",
   "main": "dist/index.js",
   "files": [
