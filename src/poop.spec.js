@@ -1,8 +1,14 @@
 import assert from 'assert'
-import { shallow, html } from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
 import poop from './poop'
+
+const ErrorComponent = React.createClass({
+  render() {
+    return <div>An error occurred</div>
+  },
+})
 
 describe('poop', () => {
   describe('class', () => {
@@ -10,18 +16,13 @@ describe('poop', () => {
       const Dummy = poop()(React.createClass({
         render() {
           return <div>Dummy</div>
-        }
+        },
       }))
       const wrapper = shallow(<Dummy />)
       assert(wrapper.contains('Dummy'))
     })
 
     it('renders the error component when something goes wrong', () => {
-      const ErrorComponent = React.createClass({
-        render() {
-          return <div>An error occurred: {this.props.error.message}</div>
-        }
-      })
       const Dummy = poop(ErrorComponent)(React.createClass({
         render() {
           return <div>{this.does.not.exist}</div>
@@ -38,7 +39,7 @@ describe('poop', () => {
         },
       }))
       const wrapper = shallow(<Dummy />)
-      assert(wrapper.contains('💩'))
+      assert(wrapper.find('Poop'))
     })
   })
 
@@ -50,11 +51,6 @@ describe('poop', () => {
     })
 
     it('renders the error component when something goes wrong', () => {
-      const ErrorComponent = React.createClass({
-        render() {
-          return <div>An error occurred: {this.props.error.message}</div>
-        }
-      })
       const Dummy = poop(ErrorComponent)(() => <div>{this.does.not.exist}</div>)
       const wrapper = shallow(<Dummy />)
       assert(wrapper.find(ErrorComponent))
@@ -63,7 +59,7 @@ describe('poop', () => {
     it('renders the poop when something goes wrong and no errorComponent was provided', () => {
       const Dummy = poop()(() => <div>{this.does.not.exist}</div>)
       const wrapper = shallow(<Dummy />)
-      assert(wrapper.contains('💩'))
+      assert(wrapper.find('Poop'))
     })
   })
 })

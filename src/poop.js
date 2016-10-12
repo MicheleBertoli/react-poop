@@ -8,25 +8,24 @@ const createClass = component => React.createClass({
   },
 })
 
-const wrap = (component, ErrorComponent) => {
-  const originalRender = component.prototype.render
+const wrap = (Target, Handler) => {
+  const originalRender = Target.prototype.render
 
-  component.prototype.render = function render(...args) {
+  Target.prototype.render = function render(...args) {
     try {
       return originalRender.apply(this, args)
     } catch (error) {
-      if (ErrorComponent) {
-        return <ErrorComponent error={error} />
-      }
-      return <div title={error}>💩</div>
+      return <Handler error={error} />
     }
   }
 
-  return component
+  return Target
 }
 
-export default errorComponent => component => {
-  const componentToWrap = isStateless(component) ? createClass(component) : component
+export default handler => component => {
+  const Component = isStateless(component) ? createClass(component) : component
+  const Poop = error => <div title={error}>💩</div>
+  const Handler = handler || Poop
 
-  return wrap(componentToWrap, errorComponent)
+  return wrap(Component, Handler)
 }
