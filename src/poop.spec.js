@@ -8,6 +8,7 @@ describe('poop', () => {
   const Handler = () => <div />
 
   describe('class', () => {
+    const error = new Error('Cannot read property \'not\' of undefined')
     let NiceClass
     let EvilClass
 
@@ -39,6 +40,14 @@ describe('poop', () => {
       assert.equal(wrapper.first().find('Handler').length, 1)
     })
 
+    it('passes the error object to the handler', () => {
+      const Dummy = poop(Handler)(EvilClass)
+      const wrapper = shallow(<Dummy />)
+
+      assert(wrapper.first().prop('error'))
+      assert.equal(wrapper.first().prop('error').message, error.message)
+    })
+
     it('renders the poop when something goes wrong', () => {
       const Dummy = poop()(EvilClass)
       const wrapper = shallow(<Dummy />)
@@ -48,6 +57,7 @@ describe('poop', () => {
   })
 
   describe('stateless', () => {
+    const error = new Error('Cannot read property \'does\' of undefined')
     let NiceStateless
     let EvilStateless
 
@@ -69,6 +79,14 @@ describe('poop', () => {
       const wrapper = shallow(<Dummy />)
 
       assert.equal(wrapper.first().find('Handler').length, 1)
+    })
+
+    it('passes the error object to the handler', () => {
+      const Dummy = poop(Handler)(EvilStateless)
+      const wrapper = shallow(<Dummy />)
+
+      assert(wrapper.first().prop('error'))
+      assert.equal(wrapper.first().prop('error').message, error.message)
     })
 
     it('renders the poop when something goes wrong', () => {
