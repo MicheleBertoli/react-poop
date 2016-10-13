@@ -1,6 +1,6 @@
 import React from 'react'
 
-const isStateless = component => !(component.prototype && component.prototype.isReactComponent)
+const isStateless = Component => !(Component.prototype && Component.prototype.isReactComponent)
 
 const createClass = component => React.createClass({
   render() {
@@ -8,10 +8,10 @@ const createClass = component => React.createClass({
   },
 })
 
-const wrap = (Target, Handler) => {
-  const originalRender = Target.prototype.render
+const wrap = (Component, Handler) => {
+  const originalRender = Component.prototype.render
 
-  Target.prototype.render = function render(...args) {
+  Component.prototype.render = function render(...args) {
     try {
       return originalRender.apply(this, args)
     } catch (error) {
@@ -19,13 +19,13 @@ const wrap = (Target, Handler) => {
     }
   }
 
-  return Target
+  return Component
 }
 
-export default handler => component => {
-  const Component = isStateless(component) ? createClass(component) : component
-  const Poop = error => <div title={error}>💩</div>
-  const Handler = handler || Poop
+const Poop = error => <div title={error}>💩</div>
 
-  return wrap(Component, Handler)
+export default Handler => Component => {
+  const Target = isStateless(Component) ? createClass(Component) : Component
+
+  return wrap(Target, Handler || Poop)
 }

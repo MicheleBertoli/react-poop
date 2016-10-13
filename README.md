@@ -2,8 +2,9 @@
 
 # react-poop
 
-react-poop wraps your stateless functions and the render method of your components
-into a try/catch block and renders a 💩 when something goes wrong.
+`react-poop` wraps your stateless functions and the render method of your components into a try/catch block.
+
+When something goes wrong, it shows a 💩 (or the custom handler you provided) so that the tree can still be rendered.
 
 ## Installation
 
@@ -18,7 +19,15 @@ import React from 'react'
 import { render } from 'react-dom'
 import poop from 'react-poop'
 
-const App = poop(() => <div>Hello react-poop</div>)
+// default
+
+const App = poop()(() => <div>Hello react-poop</div>)
+
+// or
+// with a custom handler
+
+const Handler = ({ message }) => <div>{message}</div>
+const App = poop(Handler)(() => <div>Hello react-poop</div>)
 
 render(<App />, document.getElementById('app'))
 ```

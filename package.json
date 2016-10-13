@@ -1,13 +1,13 @@
 {
   "name": "react-poop",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "The ultimate error handler for React",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "test": "mocha --compilers js:babel-register --reporter=emoji-reporter ./src/**/*.spec.js",
+    "test": "mocha --compilers js:babel-register --reporter emoji-reporter",
     "build": "babel ./src --out-dir ./dist --ignore *.spec.js",
     "prepublish": "npm run build"
   },
@@ -37,6 +37,7 @@
     "eslint-plugin-import": "^1.9.2",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
+    "jsdom": "^9.6.0",
     "mocha": "^2.5.3",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",

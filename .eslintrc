@@ -1,12 +1,13 @@
 {
   "extends": "airbnb",
+
   "env": {
     "mocha": true
   },
+
   "rules": {
     "semi": [2, "never"],
     "no-param-reassign": 0,
-    "prefer-rest-params": 0,
     "react/prefer-es6-class": 0,
     "react/prefer-stateless-function": 0,
     "react/no-multi-comp": 0
