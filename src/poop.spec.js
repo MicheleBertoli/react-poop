@@ -1,11 +1,11 @@
 import assert from 'assert'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react'
 
-import poop from '../src'
+import poop from './poop'
 
 describe('poop', () => {
-  const Handler = () => <div>Handler</div>
+  const Handler = () => <div />
 
   describe('class', () => {
     let NiceClass
@@ -34,16 +34,16 @@ describe('poop', () => {
 
     it('renders the handler when something goes wrong', () => {
       const Dummy = poop(Handler)(EvilClass)
-      const wrapper = mount(<Dummy />)
+      const wrapper = shallow(<Dummy />)
 
-      assert.equal(wrapper.find('Handler').length, 1)
+      assert.equal(wrapper.first().find('Handler').length, 1)
     })
 
     it('renders the poop when something goes wrong', () => {
       const Dummy = poop()(EvilClass)
-      const wrapper = mount(<Dummy />)
+      const wrapper = shallow(<Dummy />)
 
-      assert.equal(wrapper.find('Poop').length, 1)
+      assert.equal(wrapper.first().find('Poop').length, 1)
     })
   })
 
@@ -66,16 +66,16 @@ describe('poop', () => {
 
     it('renders the handler when something goes wrong', () => {
       const Dummy = poop(Handler)(EvilStateless)
-      const wrapper = mount(<Dummy />)
+      const wrapper = shallow(<Dummy />)
 
-      assert.equal(wrapper.find('Handler').length, 1)
+      assert.equal(wrapper.first().find('Handler').length, 1)
     })
 
     it('renders the poop when something goes wrong', () => {
       const Dummy = poop()(EvilStateless)
-      const wrapper = mount(<Dummy />)
+      const wrapper = shallow(<Dummy />)
 
-      assert.equal(wrapper.find('Poop').length, 1)
+      assert.equal(wrapper.first().find('Poop').length, 1)
     })
   })
 })
