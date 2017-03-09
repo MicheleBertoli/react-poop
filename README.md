@@ -26,7 +26,7 @@ const App = poop()(() => <div>Hello react-poop</div>)
 // or
 // with a custom handler
 
-const Handler = ({ message }) => <div>{message}</div>
+const Handler = ({ error: { message } }) => <div>{message}</div>
 const App = poop(Handler)(() => <div>Hello react-poop</div>)
 
 render(<App />, document.getElementById('app'))
